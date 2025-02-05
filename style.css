@@ -163,6 +163,7 @@ button:hover {
 
 .team:hover {
     transform: scale(1.05);
+    cursor: pointer;
 }
 
 .team h2 {
