@@ -82,7 +82,7 @@ canvas {
     left: 0;
     width: 100%;
     height: 100%;
-    cursor: grab;
+    cursor: crosshair;
     z-index: 2;
     background: #ccc;
 }
@@ -122,4 +122,80 @@ button:hover {
     top: -20px;
     animation: confetti 2s linear infinite;
     z-index: 3;
+}
+
+.final-results {
+    text-align: center;
+    padding: 50px;
+    color: white;
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(135deg, #ff416c, #ff4b2b);
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.final-results h1 {
+    font-size: 42px;
+    margin-bottom: 20px;
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.4);
+}
+
+.team-container {
+    display: flex;
+    gap: 50px;
+    justify-content: center;
+    width: 80%;
+    max-width: 900px;
+}
+
+.team {
+    background: white;
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    width: 45%;
+    text-align: center;
+    transition: transform 0.3s ease-in-out;
+}
+
+.team:hover {
+    transform: scale(1.05);
+}
+
+.team h2 {
+    color: #ff4b2b;
+    font-size: 28px;
+    margin-bottom: 10px;
+}
+
+.team ul {
+    list-style: none;
+    padding: 0;
+}
+
+.team li {
+    font-size: 18px;
+    margin: 5px 0;
+    color: #333;
+}
+
+.restart-btn {
+    margin-top: 30px;
+    padding: 15px 30px;
+    font-size: 20px;
+    background: linear-gradient(135deg, #ff416c, #ff4b2b);
+    color: white;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+.restart-btn:hover {
+    background: linear-gradient(135deg, #ff4b2b, #ff416c);
+    transform: scale(1.1);
 }

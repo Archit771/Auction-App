@@ -6,28 +6,112 @@ const players = [
     { name: "Player 5", stats: "Speed: 85, Strength: 70" }
 ];
 
-let teamToggle = true;
+// Shuffle the players array randomly
+function shuffleArray(array) {
+    for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
+    }
+}
+shuffleArray(players);
+
+let teamToggle = true; // Controls team switching
 let currentPlayerIndex = 0;
+let teamOne = [];
+let teamTwo = [];
 
 const teamTitle = document.getElementById("team-title");
 const playerName = document.getElementById("player-name");
 const playerStats = document.getElementById("player-stats");
 const drawBtn = document.getElementById("draw-btn");
 
-const canvas = document.getElementById("scratchCanvas");
-const ctx = canvas.getContext("2d");
+function drawPlayer() {
+    if (currentPlayerIndex >= players.length) {
+        showFinalTeams();
+        drawBtn.disabled = true;
+        drawBtn.textContent = "All Players Assigned!";
+        return;
+    }
 
-canvas.width = 350;
-canvas.height = 200;
+    // Get the next player randomly from the shuffled array
+    const player = players[currentPlayerIndex];
 
+    // Assign to teams
+    if (teamToggle) {
+        teamOne.push(player);
+        teamTitle.textContent = `This player is for Team One`;
+    } else {
+        teamTwo.push(player);
+        teamTitle.textContent = `This player is for Team Two`;
+    }
+
+    playerName.textContent = player.name;
+    playerStats.textContent = player.stats;
+
+    // Toggle teams for next draw
+    teamToggle = !teamToggle;
+    currentPlayerIndex++;
+
+    // Remove old canvas and create a new one
+    const oldCanvas = document.getElementById("scratchCanvas");
+    if (oldCanvas) oldCanvas.remove();
+
+    const newCanvas = document.createElement("canvas");
+    newCanvas.id = "scratchCanvas";
+    newCanvas.width = 350;
+    newCanvas.height = 200;
+    newCanvas.style.position = "absolute";
+    newCanvas.style.top = "0";
+    newCanvas.style.left = "0";
+    newCanvas.style.cursor = "crosshair";
+    newCanvas.style.background = "#ccc";
+
+    document.getElementById("scratch-card").appendChild(newCanvas);
+
+    // Update the canvas reference and context
+    canvas = newCanvas;
+    ctx = canvas.getContext("2d");
+
+    setupScratchCard(); // Reinitialize scratch functionality
+}
+
+// Function to display final team assignments
+function showFinalTeams() {
+    const teamOneNames = teamOne.map(player => `<li>${player.name} - ${player.stats}</li>`).join("");
+    const teamTwoNames = teamTwo.map(player => `<li>${player.name} - ${player.stats}</li>`).join("");
+
+    document.body.innerHTML = `
+        <div class="final-results">
+            <h1>Final Teams</h1>
+            <div class="team-container">
+                <div class="team">
+                    <h2>Team One</h2>
+                    <ul>${teamOneNames}</ul>
+                </div>
+                <div class="team">
+                    <h2>Team Two</h2>
+                    <ul>${teamTwoNames}</ul>
+                </div>
+            </div>
+            <button class="restart-btn" onclick="location.reload()">Restart Game</button>
+        </div>
+    `;
+}
+
+
+// Function to set up scratch card functionality
 function setupScratchCard() {
+    // Ensure we get the latest canvas
+    const canvas = document.getElementById("scratchCanvas");
+    const ctx = canvas.getContext("2d");
+
     ctx.fillStyle = "#a1a1a1"; // Scratch layer color
     ctx.fillRect(0, 0, canvas.width, canvas.height);
 
     let isDrawing = false;
     let totalArea = canvas.width * canvas.height;
     let scratchedArea = 0;
-    const scratchThreshold = 1; // 50%
+    const scratchThreshold = 0.5; // 50%
 
     function clearScratch(e) {
         const rect = canvas.getBoundingClientRect();
@@ -53,36 +137,13 @@ function setupScratchCard() {
         createConfetti();
     }
 
+    // Add event listeners to the new canvas
     canvas.addEventListener("mousedown", () => isDrawing = true);
     canvas.addEventListener("mouseup", () => isDrawing = false);
     canvas.addEventListener("mousemove", (e) => isDrawing && clearScratch(e));
 }
 
-function drawPlayer() {
-    if (currentPlayerIndex >= players.length) {
-        drawBtn.disabled = true;
-        drawBtn.textContent = "All Players Assigned!";
-        return;
-    }
-
-    const team = teamToggle ? "Team One" : "Team Two";
-    teamTitle.textContent = `This player is for ${team}`;
-
-    const player = players[currentPlayerIndex];
-    playerName.textContent = player.name;
-    playerStats.textContent = player.stats;
-
-    ctx.globalCompositeOperation = "source-over";
-    ctx.fillStyle = "#a1a1a1";
-    ctx.fillRect(0, 0, canvas.width, canvas.height);
-    canvas.style.opacity = 1;
-
-    teamToggle = !teamToggle;
-    currentPlayerIndex++;
-
-    
-}
-
+// Function to create confetti animation
 function createConfetti() {
     for (let i = 0; i < 50; i++) {
         let confetti = document.createElement("div");
@@ -96,6 +157,6 @@ function createConfetti() {
     }
 }
 
-drawBtn.addEventListener("click", drawPlayer);
-drawBtn.addEventListener("click", setupScratchCard);
+// Initialize scratch card on page load
 setupScratchCard();
+drawBtn.addEventListener("click", drawPlayer);
