@@ -1,0 +1,125 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body, html {
+    height: 100%;
+    font-family: 'Poppins', sans-serif;
+    overflow: hidden;
+}
+
+.background {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, #ff9a9e, #fad0c4, #fad0c4, #fbc2eb, #a18cd1);
+    background-size: 400% 400%;
+    animation: gradientShift 8s ease infinite;
+    z-index: -1;
+}
+
+@keyframes gradientShift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+h1 {
+    position: absolute;
+    top: 5%;
+    left: 50%;
+    transform: translateX(-50%);
+    color: #fff;
+    font-size: 36px;
+    text-shadow: 2px 2px 5px rgba(0,0,0,0.4);
+    z-index: 2;
+}
+
+.scratch-card {
+    position: absolute;
+    top: 30%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 350px;
+    height: 200px;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+    z-index: 2;
+    border: 4px solid #fff;
+}
+
+.player-details {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.8);
+    color: #333;
+    z-index: 1;
+}
+
+.player-details h2 {
+    font-size: 28px;
+    margin: 0;
+    color: #222;
+}
+
+.player-details p {
+    font-size: 18px;
+    margin: 5px 0 0;
+    color: #555;
+}
+
+canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    cursor: grab;
+    z-index: 2;
+    background: #ccc;
+}
+
+button {
+    position: absolute;
+    bottom: 10%;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 15px 30px;
+    font-size: 20px;
+    background: linear-gradient(135deg, #ff416c, #ff4b2b);
+    color: white;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    z-index: 2;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+button:hover {
+    background: linear-gradient(135deg, #ff4b2b, #ff416c);
+    transform: translateX(-50%) scale(1.1);
+}
+
+@keyframes confetti {
+    0% { transform: translateY(0); }
+    100% { transform: translateY(100vh); }
+}
+
+.confetti {
+    position: fixed;
+    width: 12px;
+    height: 12px;
+    background: red;
+    top: -20px;
+    animation: confetti 2s linear infinite;
+    z-index: 3;
+}
