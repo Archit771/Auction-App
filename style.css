@@ -88,26 +88,26 @@ canvas {
 }
 
 button {
-    position: absolute;
-    bottom: 10%;
-    left: 50%;
-    transform: translateX(-50%);
-    padding: 15px 30px;
-    font-size: 20px;
-    background: linear-gradient(135deg, #ff416c, #ff4b2b);
-    color: white;
-    border: none;
-    border-radius: 50px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    z-index: 2;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    /* position: absolute; */
+    /* bottom: 10%; */
+    /* left: 50%; */
+    /* transform: translateX(-50%); */
+    /* padding: 15px 30px; */
+    /* font-size: 20px; */
+    /* background: linear-gradient(135deg, #00a8a8, #ffdd35); */
+    /* color: white; */
+    /* border: none; */
+    /* border-radius: 50px; */
+    /* cursor: pointer; */
+    /* transition: all 0.3s ease; */
+    /* z-index: 2; */
+    /* box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3); */
 }
 
 button:hover {
-    background: linear-gradient(135deg, #ff4b2b, #ff416c);
-    transform: translateX(-50%) scale(1.1);
-}
+    /* background: linear-gradient(135deg,#ffdd35, #00a8a8 ); */
+    /* transform: translateX(-50%); */
+} 
 
 @keyframes confetti {
     0% { transform: translateY(0); }
@@ -122,6 +122,7 @@ button:hover {
     top: -20px;
     animation: confetti 2s linear infinite;
     z-index: 3;
+    border-radius: 20%;
 }
 
 .final-results {
@@ -129,7 +130,7 @@ button:hover {
     padding: 50px;
     color: white;
     font-family: 'Poppins', sans-serif;
-    background: linear-gradient(135deg, #ff416c, #ff4b2b);
+    background: linear-gradient(135deg, #004d00, #b1a143);
     height: 100vh;
     display: flex;
     flex-direction: column;
@@ -148,7 +149,7 @@ button:hover {
     gap: 50px;
     justify-content: center;
     width: 80%;
-    max-width: 900px;
+    max-width: 950px;
 }
 
 .team {
@@ -156,18 +157,51 @@ button:hover {
     padding: 20px;
     border-radius: 15px;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
-    width: 45%;
+    width: 50%;
     text-align: center;
-    transition: transform 0.3s ease-in-out;
+    transition: transform 0.3s ease-in-out, width 0.5s ease, height 0.5s ease;
+    cursor: pointer;
 }
 
 .team:hover {
     transform: scale(1.05);
-    cursor: pointer;
 }
 
+/* Full-Screen Mode */
+.team.fullscreen {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(1);
+    width: 90%;
+    height: 90%;
+    z-index: 100;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    overflow: auto;
+    padding: 30px;
+
+}
+
+.team.fullscreen h2 {
+    font-size: 96px;
+}
+
+.team.fullscreen ul {
+    font-size: 10px;
+}
+
+.team.fullscreen li {
+    font-size: 50px;
+}
+
+
+/* .team:hover { */
+    /* transform: scale(1.05); */
+    /* cursor: pointer; */
+/* } */
+
 .team h2 {
-    color: #ff4b2b;
+    color: #000000;
     font-size: 28px;
     margin-bottom: 10px;
 }
@@ -187,7 +221,7 @@ button:hover {
     margin-top: 30px;
     padding: 15px 30px;
     font-size: 20px;
-    background: linear-gradient(135deg, #ff416c, #ff4b2b);
+    background: linear-gradient(135deg, #007c00, #007c00);
     color: white;
     border: none;
     border-radius: 50px;
@@ -197,6 +231,128 @@ button:hover {
 }
 
 .restart-btn:hover {
-    background: linear-gradient(135deg, #ff4b2b, #ff416c);
-    transform: scale(1.1);
+    transform: scale(1.15);
 }
+
+
+
+
+.background {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, #004d00, #b1a143, #0055ff);
+    background-size: 400% 400%;
+    animation: gradientShift 8s ease infinite;
+    z-index: -1;
+}
+
+@keyframes gradientShift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+.logo {
+    position: absolute;
+    top: 10%;
+    left: 80%;
+    transform: translateX(-50%);
+    width: 490px;
+    z-index: 3;
+}
+.pay {
+    position:absolute;
+    top:17%;
+    left:20%;
+    transform: translateX(-50%);
+    width: 350px;
+    z-index: 3;
+}
+
+.donate {
+    position: absolute;
+    top: 72%;
+    left: 20%;
+    transform: translateX(-50%);
+    color: #fff;
+    font-size: 36px;
+    text-shadow: 2px 2px 5px rgba(0,0,0,0.4);
+    z-index: 2;
+}
+
+/* 12 */
+.btn-12{
+    position: absolute;
+    left: 45%;
+    top: 65%;
+    border:none;
+    box-shadow: none;
+    width: 130px;
+    cursor: pointer;
+    color: white;
+    font-weight: bold;
+    font-size: large;
+    line-height: 50px;
+    -webkit-perspective: 230px;
+    perspective: 230px;
+  }
+  .btn-12 span {
+    background: rgb(0,172,238);
+  background: linear-gradient(0deg, rgb(72, 116, 1) 0%, rgb(0, 147, 15) 100%);
+    display: block;
+    position: absolute;
+    width: 160px;
+    height: 50px;
+    /* box-shadow:inset 2px 2px 2px 0px rgba(255,255,255,.5),
+     7px 7px 20px 0px rgba(0,0,0,.1),
+     4px 4px 5px 0px rgba(0,0,0,.1); */
+    border-radius: 5px;
+    margin:0;
+    text-align: center;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    -webkit-transition: all .3s;
+    transition: all .3s;
+  }
+  .btn-12 span:nth-child(1) {
+    /* box-shadow:
+     -7px -7px 20px 0px #fff9,
+     -4px -4px 5px 0px #fff9,
+     7px 7px 20px 0px #0002,
+     4px 4px 5px 0px #0001; */
+    -webkit-transform: rotateX(90deg);
+    -moz-transform: rotateX(90deg);
+    transform: rotateX(90deg);
+    -webkit-transform-origin: 50% 50% -20px;
+    -moz-transform-origin: 50% 50% -20px;
+    transform-origin: 50% 50% -20px;
+  }
+  .btn-12 span:nth-child(2) {
+    -webkit-transform: rotateX(0deg);
+    -moz-transform: rotateX(0deg);
+    transform: rotateX(0deg);
+    -webkit-transform-origin: 50% 50% -20px;
+    -moz-transform-origin: 50% 50% -20px;
+    transform-origin: 50% 50% -20px;
+  }
+  .btn-12:hover span:nth-child(1) {
+    /* box-shadow:inset 2px 2px 2px 0px rgba(255,255,255,.5), */
+     /* 7px 7px 20px 0px rgba(0,0,0,.1), */
+     /* 4px 4px 5px 0px rgba(0,0,0,.1); */
+    -webkit-transform: rotateX(0deg);
+    -moz-transform: rotateX(0deg);
+    transform: rotateX(0deg);
+  }
+  .btn-12:hover span:nth-child(2) {
+    /* box-shadow:inset 2px 2px 2px 0px rgba(255,255,255,.5), */
+     /* 7px 7px 20px 0px rgba(0,0,0,.1), */
+     /* 4px 4px 5px 0px rgba(0,0,0,.1); */
+   color: transparent;
+    -webkit-transform: rotateX(-90deg);
+    -moz-transform: rotateX(-90deg);
+    transform: rotateX(-90deg);
+  }
+  
+  

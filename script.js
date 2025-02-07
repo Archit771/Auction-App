@@ -15,10 +15,12 @@ function shuffleArray(array) {
 }
 shuffleArray(players);
 
-let teamToggle = true; // Controls team switching
+const teamNames = ["Team One", "Team Two", "Team Three", "Team Four"]; // Controls team switching
 let currentPlayerIndex = 0;
-let teamOne = [];
-let teamTwo = [];
+let teams = [[], [], [], []]; // 4 teams as an array of arrays
+let teamIndex = 0; // Keeps track of which team to assign the next player
+
+
 
 const teamTitle = document.getElementById("team-title");
 const playerName = document.getElementById("player-name");
@@ -36,20 +38,16 @@ function drawPlayer() {
     // Get the next player randomly from the shuffled array
     const player = players[currentPlayerIndex];
 
-    // Assign to teams
-    if (teamToggle) {
-        teamOne.push(player);
-        teamTitle.textContent = `This player is for Team One`;
-    } else {
-        teamTwo.push(player);
-        teamTitle.textContent = `This player is for Team Two`;
-    }
+   // Assign player to one of the 4 teams in a rotating manner
+    teams[teamIndex].push(player);
+    teamTitle.textContent = `This player is for ${teamNames[teamIndex]}`;
+
 
     playerName.textContent = player.name;
     playerStats.textContent = player.stats;
 
     // Toggle teams for next draw
-    teamToggle = !teamToggle;
+    teamIndex = (teamIndex + 1) % 4;
     currentPlayerIndex++;
 
     // Remove old canvas and create a new one
@@ -77,8 +75,11 @@ function drawPlayer() {
 
 // Function to display final team assignments
 function showFinalTeams() {
-    const teamOneNames = teamOne.map(player => `<li>${player.name} - ${player.stats}</li>`).join("");
-    const teamTwoNames = teamTwo.map(player => `<li>${player.name} - ${player.stats}</li>`).join("");
+    const teamOneNames = teams[0].map(player => `<li>${player.name} - ${player.stats}</li>`).join("");
+    const teamTwoNames = teams[1].map(player => `<li>${player.name} - ${player.stats}</li>`).join("");
+    const teamThreeNames = teams[2].map(player => `<li>${player.name} - ${player.stats}</li>`).join("");
+    const teamFourNames = teams[3].map(player => `<li>${player.name} - ${player.stats}</li>`).join("");
+
 
     document.body.innerHTML = `
         <div class="final-results">
@@ -92,10 +93,33 @@ function showFinalTeams() {
                     <h2>Team Two</h2>
                     <ul>${teamTwoNames}</ul>
                 </div>
+                <div class="team">
+                    <h2>Team Three</h2>
+                    <ul>${teamThreeNames}</ul>
+                </div>
+                <div class="team">
+                    <h2>Team Four</h2>
+                    <ul>${teamFourNames}</ul>
+                </div>
             </div>
             <button class="restart-btn" onclick="location.reload()">Restart Game</button>
         </div>
+        <img src="Logo.png" alt="Power Play Logo" class="logo1">
+        <img src="Payment.png" alt="Power Play Logo" class="pay1">
+        <h2 class="donate1">Scan To Donate</h2>
     `;
+    // Add click event to expand team cards
+    document.querySelectorAll(".team").forEach(team => {
+        team.addEventListener("click", function () {
+            if (this.classList.contains("fullscreen")) {
+                this.classList.remove("fullscreen"); // Exit full-screen mode
+            } else {
+                document.querySelectorAll(".team").forEach(t => t.classList.remove("fullscreen")); // Reset others
+                this.classList.add("fullscreen"); // Expand this card
+            }
+        });
+    });
+
 }
 
 
