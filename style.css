@@ -11,20 +11,24 @@ body, html {
 }
 
 .background {
+    
     position: absolute;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(135deg, #ff9a9e, #fad0c4, #fad0c4, #fbc2eb, #a18cd1);
-    background-size: 400% 400%;
-    animation: gradientShift 8s ease infinite;
-    z-index: -1;
+    background-size:1490px 710px;
+    background-image: url("Background.webp");
+    height: 100vh;
+    width: 100vw;
+    filter: brightness(60%);
+    /* background: linear-gradient(135deg, #ff9a9e, #fad0c4, #fad0c4, #fbc2eb, #a18cd1); */
+    /* background-size: 400% 400%; */
+    /* animation: gradientShift 8s ease infinite; */
+    /* z-index: -1; */
 }
 
-@keyframes gradientShift {
+/* @keyframes gradientShift {
     0% { background-position: 0% 50%; }
     50% { background-position: 100% 50%; }
     100% { background-position: 0% 50%; }
-}
+} */
 
 h1 {
     position: absolute;
@@ -130,7 +134,8 @@ button:hover {
     padding: 50px;
     color: white;
     font-family: 'Poppins', sans-serif;
-    background: linear-gradient(135deg, #004d00, #b1a143);
+    background-size:1490px 710px;
+    background-image: url("Reveal_BG.jpg");
     height: 100vh;
     display: flex;
     flex-direction: column;
@@ -152,19 +157,52 @@ button:hover {
     max-width: 950px;
 }
 
+
 .team {
+    position: absolute; /* Allows free placement */
     background: white;
     padding: 20px;
+    color:black;
     border-radius: 15px;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
-    width: 50%;
+    width: 250px; /* Fixed width */
+    height: 250px; /* Fixed height */
     text-align: center;
-    transition: transform 0.3s ease-in-out, width 0.5s ease, height 0.5s ease;
+    line-height: 200%;
     cursor: pointer;
 }
 
+/* Set initial fixed positions for each team */
+.team1 { top: 10%; left: 10%; }
+.team2 { top: 10%; right: 10%; }
+.team3 { bottom: 10%; left: 10%; }
+.team4 { bottom: 10%; right: 10%; }
+
 .team:hover {
     transform: scale(1.05);
+    background: linear-gradient(45deg, #ff0000,#ff0000, #ff0000,#ff0000, #ff7300, #ffeb00, #00ff00, #00ffff, #0000ff, #8a2be2,#8a2be2,#8a2be2,#8a2be2);
+    background-size: 1000% 1000%;
+    transition: opacity 0.3s ease-in-out;
+    animation: movingGradient 10s infinite linear;
+    /* color: linear-gradient(45deg,   */
+    /* #8a2be2, #8a2be2, #8a2be2, #8a2be2,   */
+    /* #0000ff, #00ffff, #00ff00, #ffeb00,   */
+    /* #ff7300, #ff0000, #ff0000, #ff0000, #ff0000); */
+}
+li:hover{
+    font-weight: bolder;
+}
+ul{
+    font-size: x-large;
+    font-weight: bolder;
+}
+ul:hover{
+    font-weight: 900;
+}
+@keyframes movingGradient {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
 }
 
 /* Full-Screen Mode */
@@ -172,50 +210,28 @@ button:hover {
     position: fixed;
     top: 50%;
     left: 50%;
-    transform: translate(-50%, -50%) scale(1);
-    width: 90%;
+    transform: translate(-50%, -50%);
+    width: 90%; /* Fixed size remains unchanged */
     height: 90%;
     z-index: 100;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
     overflow: auto;
     padding: 30px;
-
 }
 
 .team.fullscreen h2 {
-    font-size: 96px;
+    font-size: 24px; /* Prevents oversized text */
 }
 
 .team.fullscreen ul {
-    font-size: 10px;
+    font-size: 14px;
 }
 
 .team.fullscreen li {
-    font-size: 50px;
+    font-size: 16px;
 }
 
 
-/* .team:hover { */
-    /* transform: scale(1.05); */
-    /* cursor: pointer; */
-/* } */
-
-.team h2 {
-    color: #000000;
-    font-size: 28px;
-    margin-bottom: 10px;
-}
-
-.team ul {
-    list-style: none;
-    padding: 0;
-}
-
-.team li {
-    font-size: 18px;
-    margin: 5px 0;
-    color: #333;
-}
 
 .restart-btn {
     margin-top: 30px;
@@ -234,24 +250,6 @@ button:hover {
     transform: scale(1.15);
 }
 
-
-
-
-.background {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(135deg, #004d00, #b1a143, #0055ff);
-    background-size: 400% 400%;
-    animation: gradientShift 8s ease infinite;
-    z-index: -1;
-}
-
-@keyframes gradientShift {
-    0% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
-}
 
 .logo {
     position: absolute;
@@ -354,5 +352,4 @@ button:hover {
     -moz-transform: rotateX(-90deg);
     transform: rotateX(-90deg);
   }
-  
   

@@ -85,24 +85,24 @@ function showFinalTeams() {
         <div class="final-results">
             <h1>Final Teams</h1>
             <div class="team-container">
-                <div class="team">
-                    <h2>Team One</h2>
-                    <ul>${teamOneNames}</ul>
+                <div class="team team1">
+                    <ul>Team One</ul>
+                    <div>${teamOneNames}</div>
                 </div>
-                <div class="team">
-                    <h2>Team Two</h2>
-                    <ul>${teamTwoNames}</ul>
+                <div class="team team2">
+                    <ul>Team Two</ul>
+                    <div>${teamTwoNames}</div>
                 </div>
-                <div class="team">
-                    <h2>Team Three</h2>
-                    <ul>${teamThreeNames}</ul>
+                <div class="team team3">
+                    <ul>Team Three</ul>
+                    <div>${teamThreeNames}</div>
                 </div>
-                <div class="team">
-                    <h2>Team Four</h2>
-                    <ul>${teamFourNames}</ul>
+                <div class="team team4">
+                    <ul>Team Four</ul>
+                    <div>${teamFourNames}</div>
                 </div>
             </div>
-            <button class="restart-btn" onclick="location.reload()">Restart Game</button>
+            <!-- <button class="restart-btn" onclick="location.reload()">Restart Game</button> -->
         </div>
         <img src="Logo.png" alt="Power Play Logo" class="logo1">
         <img src="Payment.png" alt="Power Play Logo" class="pay1">
@@ -135,7 +135,7 @@ function setupScratchCard() {
     let isDrawing = false;
     let totalArea = canvas.width * canvas.height;
     let scratchedArea = 0;
-    const scratchThreshold = 0.5; // 50%
+    const scratchThreshold = 2; // 50%
 
     function clearScratch(e) {
         const rect = canvas.getBoundingClientRect();
