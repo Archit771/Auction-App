@@ -5,25 +5,25 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lucky Draw</title>
     <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="style.scss">
 </head>
 <body>
     <div class="background"></div>
-    <h1 id="team-title">Click The button</h1>
+    <h1 id="team-title">This Player is for Team 1</h1>
     
-    <div class="scratch-card" id="scratch-card">
-        <canvas id="scratchCanvas"></canvas>
-        <div class="player-details" id="player-details">
-            <h2 id="player-name">???</h2>
-            <p id="player-stats">Stats: ???</p>
-        </div>
+    <img class="pay" src="Payment.png" alt="">
+    <h2 class="donate">Donate Generously!</h2>
+    <img src="Logo.png" alt="" class="logo">
+    <div class="search-container">
+        <input type="text" id="search-input" placeholder="Enter player name...">
+        <ul id="suggestions-list" class="suggestions-list"></ul>
+    </div>
+    <button id="search-btn" class="custom-btn btn-12"><span>Find</span><span>Search</span></button>
+
+    <div class="player-card" id="player-card" style="display: none;">
+        <h2 id="player-name">???</h2>
+        <p id="player-stats">Stats: ???</p>
     </div>
 
-    <button id="draw-btn" class="custom-btn btn-12"><span>Click!</span><span>Draw Player</span></button>
-
     <script src="script.js"></script>
-    <img src="Logo.png" alt="Power Play Logo" class="logo">
-    <img src="Payment.png" alt="Power Play Logo" class="pay">
-    <h2 class="donate">Scan To Donate</h2>
 </body>
 </html>
