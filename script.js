@@ -1,5 +1,5 @@
 const players = [
-    { name: "Player 1", stats: "Speed: 80, Strength: 75" zz},
+    { name: "Player 1", stats: "Speed: 80, Strength: 75" },
     { name: "Player 2", stats: "Speed: 70, Strength: 85" },
     { name: "Player 3", stats: "Speed: 90, Strength: 60" },
     { name: "Player 4", stats: "Speed: 75, Strength: 80" },
@@ -137,7 +137,7 @@ function showFinalTeams() {
                     <div>${teamFourNames}</div>
                 </div>
             </div>
-            <button class="restart-btn" onclick="location.reload()">Restart Game</button>
+            
         </div>
     `;
 }
