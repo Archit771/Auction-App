@@ -1,44 +1,77 @@
 const players = [
-    { name: "Player 1", stats: "Speed: 80, Strength: 75" },
-    { name: "Player 2", stats: "Speed: 70, Strength: 85" },
-    { name: "Player 3", stats: "Speed: 90, Strength: 60" },
-    { name: "Player 4", stats: "Speed: 75, Strength: 80" },
-    { name: "Player 5", stats: "Speed: 85, Strength: 70" }
+    { name: "Aarav K" },
+    { name: "Aarush A" },
+    { name: "Adesh A" },
+    { name: "Alim G" },
+    { name: "Almira L" },
+    { name: "Aniksha B" },
+    { name: "Anish M" },
+    { name: "Ankush A" },
+    { name: "Arham J" },
+    { name: "Arjun J" },
+    { name: "Arjun P" },
+    { name: "Atharva A" },
+    { name: "Attharva A" },
+    { name: "Gaurav W" },
+    { name: "Hrehaan C" },
+    { name: "Humayun K" },
+    { name: "Kanav" },
+    { name: "Kashvi C" },
+    { name: "Neil M" },
+    { name: "Nikunj V" },
+    { name: "Princeton T" },
+    { name: "Priya K" },
+    { name: "Rehaan B" },
+    { name: "Reyaasnh B" },
+    { name: "Reyansh J" },
+    { name: "Rimsha D" },
+    { name: "Riyansh S" },
+    { name: "Ryan S" },
+    { name: "Sai D" },
+    { name: "Sanika B" },
+    { name: "Sanvi G" },
+    { name: "Swarad S" },
+    { name: "Tarini K" },
+    { name: "Vansh G" },
+    { name: "Viaan J" },
+    { name: "Viacna J" },
+    { name: "Vidhi K" },
+    { name: "Viraj" },
+    { name: "Yash S" }
 ];
 
 const searchInput = document.getElementById("search-input");
 const searchBtn = document.getElementById("search-btn");
 const playerCard = document.getElementById("player-card");
 const playerName = document.getElementById("player-name");
-const playerStats = document.getElementById("player-stats");
+const playerImage = document.getElementById("player-image"); // Ensure this exists in HTML
 const teamTitle = document.getElementById("team-title");
 const suggestionsList = document.getElementById("suggestions-list");
 
 const teamNames = ["Team 1", "Team 2", "Team 3", "Team 4"];
-let teamIndex = 0; // Keeps track of which team to assign next
-let assignedPlayers = []; // Stores assigned players
-let teams = [[], [], [], []]; // Array for 4 teams
+let teamIndex = 0;
+let assignedPlayers = [];
+let teams = [[], [], [], []];
 
-// ✅ Function to update player suggestions and show team immediately
 function updateSuggestions() {
     const query = searchInput.value.trim().toLowerCase();
-    suggestionsList.innerHTML = ""; // Clear previous suggestions
+    suggestionsList.innerHTML = "";
 
     if (query === "") {
-        suggestionsList.style.display = "none"; // Hide if empty
-        teamTitle.textContent = "Search for a Player"; // Reset team text
+        suggestionsList.style.display = "none";
+        teamTitle.textContent = "Search for a Player";
         return;
     }
 
-    const filteredPlayers = players.filter(player => 
+    const filteredPlayers = players.filter(player =>
         player.name.toLowerCase().includes(query) && !assignedPlayers.includes(player.name)
     );
 
     if (filteredPlayers.length > 0) {
-        suggestionsList.style.display = "block"; // Show suggestions
-        teamTitle.textContent = `This player is for ${teamNames[teamIndex]}`; // ✅ Show team before clicking
+        suggestionsList.style.display = "block";
+        teamTitle.textContent = `This player is for ${teamNames[teamIndex]}`;
     } else {
-        suggestionsList.style.display = "none"; // Hide if no matches
+        suggestionsList.style.display = "none";
         teamTitle.textContent = "Player not found or already assigned!";
     }
 
@@ -47,15 +80,14 @@ function updateSuggestions() {
         li.textContent = player.name;
         li.addEventListener("click", () => {
             searchInput.value = player.name;
-            suggestionsList.innerHTML = ""; // Clear suggestions when clicked
-            suggestionsList.style.display = "none"; // Hide list
-            teamTitle.textContent = `This player is for ${teamNames[teamIndex]}`; // ✅ Show team immediately
+            suggestionsList.innerHTML = "";
+            suggestionsList.style.display = "none";
+            teamTitle.textContent = `This player is for ${teamNames[teamIndex]}`;
         });
         suggestionsList.appendChild(li);
     });
 }
 
-// ✅ Function to trigger confetti animation when a player is found
 function createConfetti() {
     for (let i = 0; i < 500; i++) {
         let confetti = document.createElement("div");
@@ -64,12 +96,10 @@ function createConfetti() {
         confetti.style.background = `hsl(${Math.random() * 360}, 100%, 50%)`;
         confetti.style.animationDuration = Math.random() * 2 + 1 + "s";
         document.body.appendChild(confetti);
-
         setTimeout(() => confetti.remove(), 2000);
     }
 }
 
-// ✅ Search and display player details (confirm selection & show confetti)
 searchBtn.addEventListener("click", function () {
     const query = searchInput.value.trim().toLowerCase();
 
@@ -82,23 +112,29 @@ searchBtn.addEventListener("click", function () {
 
     if (foundPlayer && !assignedPlayers.includes(foundPlayer.name)) {
         playerName.textContent = foundPlayer.name;
-        playerStats.textContent = foundPlayer.stats;
+
+        // Convert player name to image filename (replace spaces with underscores)
+        let imageName = foundPlayer.name+ ".png";
+
+        playerImage.src = imageName;
+        playerImage.style.display = "block"; // Ensure image is visible
+        playerImage.onerror = function () { 
+            playerImage.src = foundPlayer.name.replace(/\s+/g, "_") + ".jpg"; // Fallback to JPG
+        };
+
         playerCard.style.display = "block";
 
-        // ✅ Assign player to a team
         teams[teamIndex].push(foundPlayer);
-        assignedPlayers.push(foundPlayer.name); // Prevent duplicate assignment
+        assignedPlayers.push(foundPlayer.name);
 
         teamTitle.textContent = `This player is for ${teamNames[teamIndex]}`;
 
-        createConfetti(); // 🎉 Trigger confetti when a player is confirmed!
+        createConfetti();
 
-        // ✅ Rotate teams for the next search
         teamIndex = (teamIndex + 1) % 4;
 
-        // ✅ If all players are assigned, show final screen
         if (assignedPlayers.length === players.length) {
-            setTimeout(showFinalTeams, 2000); // Delay to let confetti finish
+            setTimeout(showFinalTeams, 2000);
         }
     } else {
         alert("Player not found or already assigned!");
@@ -106,15 +142,13 @@ searchBtn.addEventListener("click", function () {
     }
 });
 
-// ✅ Detect input changes and update suggestions dynamically
 searchInput.addEventListener("input", updateSuggestions);
 
-// ✅ Function to display final team assignments (End Screen)
 function showFinalTeams() {
-    const teamOneNames = teams[0].map(player => `<li>${player.name} - ${player.stats}</li>`).join("");
-    const teamTwoNames = teams[1].map(player => `<li>${player.name} - ${player.stats}</li>`).join("");
-    const teamThreeNames = teams[2].map(player => `<li>${player.name} - ${player.stats}</li>`).join("");
-    const teamFourNames = teams[3].map(player => `<li>${player.name} - ${player.stats}</li>`).join("");
+    const teamOneNames = teams[0].map(player => `<li>${player.name}</li>`).join("");
+    const teamTwoNames = teams[1].map(player => `<li>${player.name}</li>`).join("");
+    const teamThreeNames = teams[2].map(player => `<li>${player.name}</li>`).join("");
+    const teamFourNames = teams[3].map(player => `<li>${player.name}</li>`).join("");
 
     document.body.innerHTML = `
         <div class="final-results">
@@ -137,7 +171,6 @@ function showFinalTeams() {
                     <div>${teamFourNames}</div>
                 </div>
             </div>
-            
         </div>
     `;
 }
